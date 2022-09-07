@@ -4,9 +4,6 @@ import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,38 +14,20 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity {
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
-    private SensorManager mSensorManager;
-    private Sensor mAccelerometer;
-    private ShakeDetector mShakeDetector;
+public class MainActivity extends AppCompatActivity {
 
     RelativeLayout number_container;
     RelativeLayout dice_container;
     RelativeLayout coin_container;
     RelativeLayout card_container;
-
-    TextView num;
-    EditText et_min;
-    EditText et_max;
-    LinearLayout number_results;
-    TextView number_rolled;
-
-    ImageView dice;
-    LinearLayout dice_results;
-    TextView dice_rolled;
-
-    ImageView coin;
-    LinearLayout coin_results;
-    TextView coin_flipped;
-
-    ImageView card;
-    LinearLayout card_results;
-    TextView card_drawn;
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+    private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
@@ -86,6 +65,23 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     };
+    TextView num;
+    EditText et_min;
+    EditText et_max;
+    LinearLayout number_results;
+    TextView number_rolled;
+    ImageView dice;
+    LinearLayout dice_results;
+    TextView dice_rolled;
+    ImageView coin;
+    LinearLayout coin_results;
+    TextView coin_flipped;
+    ImageView card;
+    LinearLayout card_results;
+    TextView card_drawn;
+    private SensorManager mSensorManager;
+    private Sensor mAccelerometer;
+    private ShakeDetector mShakeDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 if (keyCode == KeyEvent.KEYCODE_ENTER) {
 
                     getWindow().getDecorView().clearFocus();
-                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(et_min.getWindowToken(), 0);
 
                 }
@@ -138,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
                 if (keyCode == KeyEvent.KEYCODE_ENTER) {
 
                     getWindow().getDecorView().clearFocus();
-                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(et_max.getWindowToken(), 0);
 
                 }
@@ -151,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 getWindow().getDecorView().clearFocus();
-                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(et_min.getWindowToken(), 0);
 
                 doNumberRoll();
@@ -204,13 +200,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void doNumberRoll() {
 
-        if (et_min.getText().toString().matches("")){
+        if (et_min.getText().toString().matches("")) {
             et_min.setText("0");
         }
 
         int min = Integer.parseInt(et_min.getText().toString());
 
-        if (et_max.getText().toString().matches("")){
+        if (et_max.getText().toString().matches("")) {
             if (min < 100) {
                 et_max.setText("100");
             } else {
@@ -242,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
         Random rn = new Random();
         int rand = rn.nextInt(6) + 1;
 
-        switch(rand){
+        switch (rand) {
             case 1:
                 dice.setImageResource(getResources().getIdentifier("dice_1", "drawable", getPackageName()));
                 break;
@@ -275,7 +271,7 @@ public class MainActivity extends AppCompatActivity {
         Random rn = new Random();
         int rand = rn.nextInt(2);
 
-        switch(rand){
+        switch (rand) {
             case 0:
                 coin.setImageResource(getResources().getIdentifier("coin_head", "drawable", getPackageName()));
                 break;
@@ -285,7 +281,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         TextView new_coin_result = new TextView(this);
-        if (rand == 0){
+        if (rand == 0) {
             new_coin_result.setText("Heads");
         } else {
             new_coin_result.setText("Tails");
@@ -306,31 +302,31 @@ public class MainActivity extends AppCompatActivity {
         String card_number = "";
         String card_result_text = "";
 
-        if (rand_joker == 0){
+        if (rand_joker == 0) {
             card.setImageResource(getResources().getIdentifier("card_xjoker", "drawable", getPackageName()));
         } else {
             //rn = new Random();
             rand_suit = rn.nextInt(4);
             rand_number = rn.nextInt(13) + 1;
 
-            if (rand_number == 1){
+            if (rand_number == 1) {
                 card_number = "a";
                 card_result_text = "Aces of ";
-            } else if (rand_number == 11){
+            } else if (rand_number == 11) {
                 card_number = "j";
                 card_result_text = "Jack of ";
-            } else if (rand_number == 12){
+            } else if (rand_number == 12) {
                 card_number = "q";
                 card_result_text = "Queen of ";
-            } else if(rand_number == 13){
+            } else if (rand_number == 13) {
                 card_number = "k";
                 card_result_text = "King of ";
             } else {
                 card_number = Integer.toString(rand_number);
-                card_result_text = Integer.toString(rand_number) + " of ";
+                card_result_text = rand_number + " of ";
             }
 
-            switch(rand_suit){
+            switch (rand_suit) {
                 case 0:
                     card_suit = "c";
                     card_result_text = card_result_text + "Clubs";
@@ -355,7 +351,7 @@ public class MainActivity extends AppCompatActivity {
         TextView new_card_result = new TextView(this);
 
 
-        if (rand_joker == 0){
+        if (rand_joker == 0) {
             new_card_result.setText("Joker");
         } else {
             new_card_result.setText(card_result_text);
@@ -366,18 +362,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void handleShakeEvent(int count){
+    public void handleShakeEvent(int count) {
 
         //if (count == 1){
-            if (number_container.getVisibility() == View.VISIBLE){
-                doNumberRoll();
-            } else if (dice_container.getVisibility() == View.VISIBLE){
-                doDiceRoll();
-            } else if (coin_container.getVisibility() == View.VISIBLE){
-                doCoinFlip();
-            } else if (card_container.getVisibility() == View.VISIBLE){
-                doDrawCard();
-            }
+        if (number_container.getVisibility() == View.VISIBLE) {
+            doNumberRoll();
+        } else if (dice_container.getVisibility() == View.VISIBLE) {
+            doDiceRoll();
+        } else if (coin_container.getVisibility() == View.VISIBLE) {
+            doCoinFlip();
+        } else if (card_container.getVisibility() == View.VISIBLE) {
+            doDrawCard();
+        }
         //}
     }
 
@@ -385,7 +381,7 @@ public class MainActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         // Add the following line to register the Session Manager Listener onResume
-        mSensorManager.registerListener(mShakeDetector, mAccelerometer,	SensorManager.SENSOR_DELAY_UI);
+        mSensorManager.registerListener(mShakeDetector, mAccelerometer, SensorManager.SENSOR_DELAY_UI);
     }
 
     @Override
