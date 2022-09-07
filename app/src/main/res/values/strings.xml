@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Random Generator</string>
+    <string name="title_number">Random Number</string>
+    <string name="title_dice">Dice Roll</string>
+    <string name="title_coin">Flip Coin</string>
+    <string name="title_card">Draw Card</string>
+</resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_number"
+        android:icon="@drawable/random"
+        android:title="@string/title_number" />
+
+    <item
+        android:id="@+id/navigation_dice"
+        android:icon="@drawable/dice"
+        android:title="@string/title_dice" />
+
+    <item
+        android:id="@+id/navigation_coin"
+        android:icon="@drawable/coin"
+        android:title="@string/title_coin" />
+
+    <item
+        android:id="@+id/navigation_card"
+        android:icon="@drawable/card"
+        android:title="@string/title_card" />
+
+</menu>
